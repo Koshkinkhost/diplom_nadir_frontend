@@ -1,0 +1,86 @@
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-overlay">
+    <h1>Добро пожаловать в StayInn</h1>
+    <p>Уют. Комфорт. Качество. Бронирование онлайн за 2 минуты</p>
+    <a routerLink="/booking" class="btn-primary">Забронировать номер</a>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="features container">
+  <h2>Почему выбирают нас?</h2>
+  <div class="features-grid">
+    <div class="feature-item">
+      <img src="/free-icon-hotel-5140110.png" alt="Комфорт" />
+      <h3>Уютные номера</h3>
+      <p>Современный интерьер, ежедневная уборка, Wi-Fi и кондиционер</p>
+    </div>
+    <div class="feature-item">
+      <img src="/free-icon-location-3894030.png" alt="Расположение" />
+      <h3>Отличное расположение</h3>
+      <p>Мы в центре города, рядом кафе, транспорт и парки</p>
+    </div>
+    <div class="feature-item">
+      <img src="/free-icon-online-service-1989886.png" alt="Сервис" />
+      <h3>Круглосуточный сервис</h3>
+      <p>Мы всегда на связи — поддержка 24/7</p>
+    </div>
+  </div>
+</section>
+
+<!-- Rooms Preview Section -->
+<section class="rooms-preview container">
+  <h2>Популярные номера</h2>
+  <div class="room-cards">
+  </div>
+  <div class="room-cards">
+      @for( room of popularRooms; track $index) {
+        <div class="room-card">
+          <img src="{{room.mainImageUrl}}" alt="{{room.type}}" class="room-image" />
+          <h3>{{room.type}}</h3>
+          <p>{{room.description}}</p>
+          <p class="price">{{room.pricePerNight}}</p>
+        </div>
+      }
+    </div>
+  <a routerLink="/rooms" class="btn-secondary">Смотреть все номера</a>
+</section>
+
+<!-- Reviews Section -->
+<section class="reviews container">
+  <h2>Отзывы гостей</h2>
+  <div class="review-cards">
+    <!-- <div class="review-card" *ngFor="let review of latestReviews">
+      <p class="quote">“{{ review.comment }}”</p>
+      <p class="author">— {{ review.guestName }}</p>
+    </div> -->
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-content container">
+    <div class="footer-column">
+      <h3>StayInn</h3>
+      <p>Лучшее место для отдыха и командировок</p>
+    </div>
+    <div class="footer-column">
+      <h4>Контакты</h4>
+      <p>📞 +7 (000) 123-45-67</p>
+<span>{{ '✉️ stayinn@mail.ru' }}</span>
+      <p>📍 ул. Пушкина, д. 10</p>
+    </div>
+    <div class="footer-column">
+      <h4>Навигация</h4>
+      <ul>
+        <li><a routerLink="/">Главная</a></li>
+        <li><a routerLink="/rooms">Номера</a></li>
+        <li><a routerLink="/booking">Бронирование</a></li>
+        <li><a routerLink="/feedback">Отзывы</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2025 HotelName. Все права защищены.</div>
+</footer>

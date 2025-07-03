@@ -1,0 +1,53 @@
+.auth {
+  max-width: 400px;
+  margin: auto;
+  padding: 2rem;
+  background: #fefefe;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.auth h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.auth form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.auth input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.btn-primary {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 0.6rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #007bff;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.success-msg {
+  color: green;
+  text-align: center;
+}
+
+.error-msg {
+  color: red;
+  text-align: center;
+}

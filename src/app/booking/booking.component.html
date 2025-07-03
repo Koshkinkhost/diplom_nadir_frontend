@@ -1,0 +1,43 @@
+<section class="booking container">
+  <h1>Бронирование номера</h1>
+  <p>Выберите номер и даты заезда/выезда, чтобы забронировать.</p>
+
+  <form (ngSubmit)="bookRoom()" class="booking-form">
+    <label for="room">Выберите номер:</label>
+    <select id="room" [(ngModel)]="roomId" name="roomId" required>
+      @for (room of rooms; track room.id) {
+        <option [value]="room.id">{{ room.type }} : {{ room.pricePerNight }} ₽/ночь</option>
+      }
+    </select>
+
+    <div class="date-fields">
+      <div>
+        <label for="checkIn">Дата заезда:</label>
+        <input type="date" id="checkIn" [(ngModel)]="checkIn" name="checkIn" required />
+      </div>
+
+      <div>
+        <label for="checkOut">Дата выезда:</label>
+        <input type="date" id="checkOut" [(ngModel)]="checkOut" name="checkOut" required />
+      </div>
+    </div>
+
+    <div class="guest-info">
+      <label for="name">Ваше имя:</label>
+      <input type="text" id="name" [(ngModel)]="guestName" name="guestName" required />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" [(ngModel)]="guestEmail" name="guestEmail" required />
+    </div>
+
+    <button type="submit" class="btn-primary">Забронировать</button>
+
+    @if (successMessage !== '') {
+      <p class="success-msg">{{ successMessage }}</p>
+    }
+
+    @if (errorMessage !== '') {
+      <p class="error-msg">{{ errorMessage }}</p>
+    }
+  </form>
+</section>

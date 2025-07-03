@@ -1,0 +1,20 @@
+<p>room works!</p>
+<div class="room-card">
+  <img [src]="room.imageUrl" [alt]="room.type" class="room-image" />
+
+  <div class="room-info">
+    <h3 class="room-type">{{ room.type }}</h3>
+
+    @if(room.description){
+      <p class="room-description">{{ room.description }}</p>
+
+    }
+    
+
+    <div class="room-price">{{ room.price  }} / ночь</div>
+  </div>
+
+  <button class="btn-book">
+    Забронировать
+  </button>
+</div>

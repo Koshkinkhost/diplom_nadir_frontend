@@ -1,0 +1,32 @@
+<section class="auth container">
+  <h2>{{ isLoginMode ? 'Вход' : 'Регистрация' }}</h2>
+
+  <form (ngSubmit)="submit()">
+    @if (!isLoginMode) {
+      <label for="name">Имя:</label>
+      <input type="text" id="name" name="name" [(ngModel)]="name" required />
+    }
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" [(ngModel)]="email" required />
+
+    <label for="password">Пароль:</label>
+    <input type="password" id="password" name="password" [(ngModel)]="password" required />
+
+    <button type="submit" class="btn-primary">
+      {{ isLoginMode ? 'Войти' : 'Зарегистрироваться' }}
+    </button>
+
+    <button type="button" class="btn-secondary switch" (click)="toggleMode()">
+      {{ isLoginMode ? 'Нет аккаунта? Зарегистрируйтесь' : 'Уже есть аккаунт? Войти' }}
+    </button>
+
+    @if (message !== '') {
+      <p class="success-msg">{{ message }}</p>
+    }
+
+    @if (error !== '') {
+      <p class="error-msg">{{ error }}</p>
+    }
+  </form>
+</section>

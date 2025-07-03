@@ -1,0 +1,31 @@
+.header {
+  background-color: #1e1e1e;
+  color: white;
+  padding: 10px 30px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo a {
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.nav a {
+  color: #ccc;
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav a:hover,
+.nav a.active {
+  color: white;
+}

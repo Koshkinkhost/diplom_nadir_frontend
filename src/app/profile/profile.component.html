@@ -1,0 +1,14 @@
+<section class="profile container">
+  <div class="profile-box">
+    <h2>Личный кабинет</h2>
+
+    @if (error !== '') {
+      <p class="error-msg">{{ error }}</p>
+    } @else {
+      <p><strong>Имя:</strong> {{ userName }}</p>
+      <p><strong>Email:</strong> {{ userEmail }}</p>
+
+      <button class="btn-primary" (click)="logout()">Выйти</button>
+    }
+  </div>
+</section>
