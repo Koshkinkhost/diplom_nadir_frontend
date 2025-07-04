@@ -63,26 +63,26 @@ private userSubject = new BehaviorSubject<User | null>(null);
     }
   this.userSubject.next(null);
 
+
     return res.text();
   }
 
   // Получить текущего пользователя
-  async getCurrentUser(): Promise<{ name: string; email: string }> {
-    const res = await fetch(`${this.baseUrl}/me`, {
-      credentials: 'include'
-    });
+  async getCurrentUser(): Promise<{ id: number; name: string; email: string }> {
+  const res = await fetch(`${this.baseUrl}/me`, {
+    credentials: 'include'
+  });
 
-    if (res.status === 401) {
-      throw new Error('Не авторизован');
-    }
-
-    if (!res.ok) {
-      throw new Error('Ошибка получения пользователя');
-    }
-
-    return res.json();
+  if (res.status === 401) {
+    throw new Error('Не авторизован');
   }
-  ResetUser(){
 
+  if (!res.ok) {
+    throw new Error('Ошибка получения пользователя');
   }
+
+  return res.json();
+}
+
+  
 }

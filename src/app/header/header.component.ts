@@ -16,6 +16,7 @@ import { Subscription } from 'rxjs';
 })
 export class HeaderComponent {
   userName: string = 'Гость';
+ID?:number=0;
   private sub?: Subscription;
 
   constructor(public auth: AuthService) {}
@@ -24,8 +25,10 @@ export class HeaderComponent {
     this.sub = this.auth.user$.subscribe(user => {
       if (user) {
         this.userName = user.name || user.email || 'Гость';
+        this.ID=user.id
       } else {
         this.userName = 'Гость';
+        this.ID=0;
       }
     });
 

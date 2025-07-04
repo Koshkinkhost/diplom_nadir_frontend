@@ -22,8 +22,9 @@ export class BookingService {
   }
 
   // Создать новое бронирование
-  async createBooking(booking: Partial<Booking>): Promise<Booking> {
-    const res = await fetch(this.baseUrl, {
+  async createBooking(booking: Booking): Promise<Booking> {
+    console.log(booking);
+    const res = await fetch("http://localhost:5144/api/booking/", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',

@@ -29,3 +29,22 @@
 .nav a.active {
   color: white;
 }
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #333;
+  padding: 6px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.user-info:hover {
+  background-color: #444;
+}
+
+
+
