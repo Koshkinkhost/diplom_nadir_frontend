@@ -30,6 +30,23 @@
       <input type="email" id="email" [(ngModel)]="guestEmail" name="guestEmail" required />
     </div>
 
+    <!-- ✅ Выбор дополнительных услуг -->
+    <div class="extra-services">
+      <label>Дополнительные услуги:</label>
+      @for (service of services; track $index) {
+        <div>
+          <label>
+            <input
+              type="checkbox"
+              [value]="service.id"
+              (change)="onServiceToggle(service)"
+            />
+            {{ service.name }} — {{ service.price }} ₽
+          </label>
+        </div>
+      }
+    </div>
+
     <button type="submit" class="btn-primary">Забронировать</button>
 
     @if (successMessage !== '') {

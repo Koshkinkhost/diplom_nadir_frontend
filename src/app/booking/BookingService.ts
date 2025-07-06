@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Booking } from './Booking';
-
+import { Service } from './Service';
 @Injectable({
   providedIn: 'root'
 })
 export class BookingService {
-  private baseUrl = 'http://localhost:5144/api/bookings/'; // слеш в конце!
+  private baseUrl = 'http://localhost:5144/api/booking/'; // слеш в конце!
 
   // Получить все бронирования
   async getAllBookings(): Promise<Booking[]> {
     const res = await fetch(this.baseUrl, { credentials: 'include' });
+    console.log(res.json())
     if (!res.ok) throw new Error('Ошибка при загрузке списка бронирований');
     return res.json();
   }
@@ -20,7 +21,15 @@ export class BookingService {
     if (!res.ok) throw new Error('Ошибка при получении бронирования');
     return res.json();
   }
-
+async getAvailableServices(): Promise<Service[]> {
+  console.log("ВЫЗЫВАЮ")
+  const res = await fetch('http://localhost:5144/api/booking/services', {
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include'
+  });
+  if (!res.ok) throw new Error('Не удалось загрузить список услуг');
+  return res.json();
+}
   // Создать новое бронирование
   async createBooking(booking: Booking): Promise<Booking> {
     console.log(booking);

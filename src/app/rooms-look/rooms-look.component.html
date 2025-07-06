@@ -1,0 +1,31 @@
+<section class="rooms container">
+  <h1>Наши номера</h1>
+
+  @if (errorMessage !== '') {
+  <div class="error-msg">
+    {{ errorMessage }}
+  </div>
+}
+
+
+  <div class="room-list">
+    @for (room of rooms; track room.id) {
+      <div class="room-card">
+        <h3>{{ room.type }}</h3>
+        <p>Цена за ночь: <strong>{{ room.pricePerNight }} ₽</strong></p>
+        <img src={{room.mainImageUrl}}>
+        <p>{{ room.description }}</p>
+        
+        <p><strong>Удобства:</strong></p>
+<div class="facility-list">
+  @for (f of room.falitires; track $index) {
+    <span class="facility-tag">{{ f.name }}</span>
+  }
+</div>
+
+
+        <button routerLink="/booking" [queryParams]="{ roomId: room.id }" class="btn-primary">Забронировать</button>
+      </div>
+    }
+  </div>
+</section>

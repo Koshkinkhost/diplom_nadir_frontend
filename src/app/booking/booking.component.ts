@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 import { RoomsService } from '../room/RoomService';
 import { FormsModule } from '@angular/forms'; 
   import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
@@ -7,6 +9,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BookingService } from './BookingService';
 import { AuthService } from '../auth/AuthService';
+import { Service } from './Service';
 @Component({
   selector: 'app-booking',
   standalone: true,
@@ -15,6 +18,7 @@ templateUrl: './booking.component.html',
   styleUrl: './booking.component.css'
 })
 export class BookingComponent {
+  services:Service[]=[]
 rooms: Room[] = [];
   roomId: number = 0;
   checkIn: string = '';
@@ -25,24 +29,40 @@ pricePerNight:number=0;
   successMessage = '';
   errorMessage = '';
   userId:Number=0;
+selectedServiceIds: number[] = [];
 
 constructor(
   private roomService: RoomsService,
   private bookingService: BookingService,
   private router:Router,
-  private auth:AuthService
+  private auth:AuthService,
+    private route: ActivatedRoute,
+
 ) {}
   async ngOnInit() {
+    this.route.queryParams.subscribe((params:any) => {
+    const id = +params['roomId'];
+    if (id) {
+      this.roomId = id;
+    }
+  });
     this.rooms = await this.roomService.getRooms();
+    this.services = await this.bookingService.getAvailableServices();
     try {
       const user = await this.auth.getCurrentUser();
       this.userId = user.id;
-      // ...
+      
     } catch {
       this.router.navigate(['/auth']);
     }
   }
-
+onServiceToggle(service: Service) {
+  if (service.IsChecked) {
+    this.selectedServiceIds.push(service.id);
+  } else {
+    this.selectedServiceIds = this.selectedServiceIds.filter((id:any) => id !== service.id);
+  }
+}
   async bookRoom() {
     this.errorMessage = '';
     this.successMessage = '';

@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
 import { AuthComponent } from './auth/auth.component';
 import { authGuard } from '../../auth.guard';
 import { ProfileComponent } from './profile/profile.component';
+import { RoomsLookComponent } from './rooms-look/rooms-look.component';
 export const routes: Routes = [
     {
         path:'',
@@ -19,5 +20,9 @@ export const routes: Routes = [
         component:AuthComponent
     },
       { path: 'profile', component: ProfileComponent,canActivate: [authGuard] },
+      {
+         path:"rooms",
+        component:RoomsLookComponent
+      }
 
 ];
