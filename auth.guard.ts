@@ -3,14 +3,14 @@ import { CanActivateFn, Router } from '@angular/router';
 import { inject } from '@angular/core';
 import { AuthService } from './src/app/auth/AuthService';
 export const authGuard: CanActivateFn = async (route, state) => {
-  const authService = inject(AuthService);
+ const authService = inject(AuthService);
   const router = inject(Router);
 
   try {
-    const user = await authService.getCurrentUser();
-    return true; // пользователь авторизован — доступ разрешён
+    const user = await authService.loadCurrentUser(); // ← сначала сохраняем!
+    if (user) return true;
+    return false;
   } catch {
-    router.navigateByUrl('/auth'); // редирект на вход
     return false;
   }
 };

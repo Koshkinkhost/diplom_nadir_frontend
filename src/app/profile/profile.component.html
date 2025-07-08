@@ -2,13 +2,49 @@
   <div class="profile-box">
     <h2>Личный кабинет</h2>
 
+    <!-- 🔽 Меню навигации по разделам -->
+    <nav class="profile-nav">
+      <button 
+        class="tab-btn" 
+        [class.active]="activeTab === 'profile'"
+        (click)="activeTab = 'profile'">
+        Профиль
+      </button>
+
+      <button 
+        class="tab-btn" 
+        [class.active]="activeTab === 'bookings'"
+        (click)="activeTab = 'bookings'">
+        Мои бронирования
+      </button>
+
+      <button 
+        class="tab-btn" 
+        [class.active]="activeTab === 'settings'"
+        (click)="activeTab = 'settings'">
+        Настройки
+      </button>
+    </nav>
+
+    <hr />
+
+    <!-- 🔽 Содержимое вкладок -->
     @if (error !== '') {
       <p class="error-msg">{{ error }}</p>
     } @else {
-      <p><strong>Имя:</strong> {{ userName }}</p>
-      <p><strong>Email:</strong> {{ userEmail }}</p>
+      @if (activeTab === 'profile') {
+        <p><strong>Имя:</strong> {{ userName }}</p>
+        <p><strong>Email:</strong> {{ userEmail }}</p>
+        <button class="btn-primary" (click)="logout()">Выйти</button>
+      }
 
-      <button class="btn-primary" (click)="logout()">Выйти</button>
+      @if (activeTab === 'bookings') {
+        <app-my-bookings />
+      }
+
+      @if (activeTab === 'settings') {
+        <p>Здесь будут настройки профиля (смена пароля, уведомления и т.д.)</p>
+      }
     }
   </div>
 </section>

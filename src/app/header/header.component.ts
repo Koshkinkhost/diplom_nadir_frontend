@@ -18,10 +18,12 @@ export class HeaderComponent {
   userName: string = 'Гость';
 ID?:number=0;
   private sub?: Subscription;
-
+user: User | null = null;
   constructor(public auth: AuthService) {}
 
   ngOnInit() {
+      this.auth.user$.subscribe(u => this.user = u);
+
     this.sub = this.auth.user$.subscribe(user => {
       if (user) {
         this.userName = user.name || user.email || 'Гость';

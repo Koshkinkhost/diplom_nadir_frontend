@@ -3,6 +3,7 @@ import { RoomsService } from '../room/RoomService';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Room } from '../room/Room';
+import { AuthService } from '../auth/AuthService';
 @Component({
   selector: 'app-rooms-look',
   standalone: true,
@@ -13,11 +14,12 @@ import { Room } from '../room/Room';
 export class RoomsLookComponent {
 rooms: Room[] = [];
   errorMessage = '';
-
-  constructor(private roomService: RoomsService) {}
+user:any;
+  constructor(private roomService: RoomsService,public authservice:AuthService) {}
 
   async ngOnInit() {
     try {
+      this.user=await this.authservice.loadCurrentUser();
       this.rooms = await this.roomService.getRooms();
       console.log(this.rooms);
     } catch (err) {

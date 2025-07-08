@@ -5,8 +5,8 @@
   <form (ngSubmit)="bookRoom()" class="booking-form">
     <label for="room">Выберите номер:</label>
     <select id="room" [(ngModel)]="roomId" name="roomId" required>
-      @for (room of rooms; track room.id) {
-        <option [value]="room.id">{{ room.type }} : {{ room.pricePerNight }} ₽/ночь</option>
+      @for (room of rooms; track $index) {
+        <option [value]="room.roomId">{{ room.typeR }} : {{ room.pricePerNight }} ₽/ночь</option>
       }
     </select>
 

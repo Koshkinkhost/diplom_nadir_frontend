@@ -9,10 +9,10 @@
 
 
   <div class="room-list">
-    @for (room of rooms; track room.id) {
+    @for (room of rooms; track $index) {
       <div class="room-card">
-        <h3>{{ room.type }}</h3>
-        <p>Цена за ночь: <strong>{{ room.pricePerNight }} ₽</strong></p>
+        <h3>{{ room.typeR }}</h3>
+        <p>Цена за ночь: <strong>{{ room.pricePerNight | currency: 'RUB ':'symbol':'1.0-0' }} </strong></p>
         <img src={{room.mainImageUrl}}>
         <p>{{ room.description }}</p>
         
@@ -23,8 +23,7 @@
   }
 </div>
 
-
-        <button routerLink="/booking" [queryParams]="{ roomId: room.id }" class="btn-primary">Забронировать</button>
+        <button routerLink="/booking" [queryParams]="{ roomId: room.roomId,username:user.name}" class="btn-primary">Забронировать</button>
       </div>
     }
   </div>

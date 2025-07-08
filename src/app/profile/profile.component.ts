@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth/AuthService';
 import { Router } from '@angular/router';
+import { MyBookingsComponent } from '../my-bookings/my-bookings.component';
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [],
+  imports: [MyBookingsComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
@@ -14,6 +15,7 @@ export class ProfileComponent {
   error = '';
 
   constructor(private authService: AuthService, private router: Router) {}
+  activeTab: 'profile' | 'bookings' | 'settings' = 'profile';
 
   async ngOnInit() {
     try {

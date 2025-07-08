@@ -16,8 +16,8 @@ export class BookingService {
   }
 
   // Получить бронирование по ID
-  async getBooking(id: number): Promise<Booking> {
-    const res = await fetch(`${this.baseUrl}${id}`, { credentials: 'include' });
+  async getBooking(id: number): Promise<any> {
+    const res = await fetch(`${this.baseUrl}user/${id}`, { credentials: 'include' });
     if (!res.ok) throw new Error('Ошибка при получении бронирования');
     return res.json();
   }

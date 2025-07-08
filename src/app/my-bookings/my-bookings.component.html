@@ -1,0 +1,40 @@
+<section class="my-bookings">
+  <h2>Мои бронирования</h2>
+
+  @if (errorMessage !== '') {
+    <p class="error-msg">{{ errorMessage }}</p>
+  }
+
+  @if (bookings.length === 0) {
+    <p class="no-bookings-msg">У вас пока нет бронирований.</p>
+  } @else {
+    <div class="booking-list">
+      @for (booking of bookings; track $index) {
+        <div class="booking-card">
+          <div class="booking-header">
+            <h3>Бронирование №{{ booking.id }}</h3>
+            <span class="status">{{ booking.status }}</span>
+          </div>
+
+          <p><strong>Номер комнаты:</strong> {{ booking.room?.type || '—' }}</p>
+          <p><strong>Цена за ночь:</strong> {{ booking.room?.pricePerNight || '—' }} ₽</p>
+
+          <p><strong>Дата заезда:</strong> {{ booking.checkIn }}</p>
+          <p><strong>Дата выезда:</strong> {{ booking.checkOut }}</p>
+          <p><strong>Создано:</strong> {{ booking.createdAt | date:'medium' }}</p>
+
+          @if (booking.bookingServices?.length > 0) {
+            <div class="services-list">
+              <strong>Доп. услуги:</strong>
+              <ul>
+                @for (s of booking.bookingServices; track s.id) {
+                  <li>{{ s.name }} — {{ s.price }} ₽</li>
+                }
+              </ul>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  }
+</section>

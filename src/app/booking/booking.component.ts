@@ -10,6 +10,8 @@ import { CommonModule } from '@angular/common';
 import { BookingService } from './BookingService';
 import { AuthService } from '../auth/AuthService';
 import { Service } from './Service';
+import {  OnInit } from '@angular/core'; // <-- добавь OnInit
+
 @Component({
   selector: 'app-booking',
   standalone: true,
@@ -39,19 +41,27 @@ constructor(
     private route: ActivatedRoute,
 
 ) {}
-  async ngOnInit() {
-    this.route.queryParams.subscribe((params:any) => {
-    const id = +params['roomId'];
-    if (id) {
-      this.roomId = id;
-    }
-  });
+   ngOnInit(): void {
+    this.init(); // <-- вызываем реальный async метод отдельно
+  }
+
+  private async init() {
+    this.route.queryParams.subscribe((params: any) => {
+      const id = +params['roomId'];
+      const name=params['username']
+      if (id) {
+        this.roomId = id; // тут устанавливается выбранный номер
+        console.log("имя юзера"+ name);
+        this.guestName=name;
+      }
+    });
+
     this.rooms = await this.roomService.getRooms();
     this.services = await this.bookingService.getAvailableServices();
+
     try {
       const user = await this.auth.getCurrentUser();
       this.userId = user.id;
-      
     } catch {
       this.router.navigate(['/auth']);
     }

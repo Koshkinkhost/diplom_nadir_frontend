@@ -29,8 +29,11 @@ private userSubject = new BehaviorSubject<User | null>(null);
   try {
     const user = await this.getCurrentUser();
     this.userSubject.next(user);
+    console.log(user);
+    return user;
   } catch {
     this.userSubject.next(null);
+    return null;
   }
 }
 
