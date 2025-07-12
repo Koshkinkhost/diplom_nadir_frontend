@@ -1,0 +1,79 @@
+<section class="admin-rooms container">
+  <h2>Управление комнатами</h2>
+
+  @if (error !== '') {
+    <p class="error-msg">{{ error }}</p>
+  }
+
+  @if (success !== '') {
+    <p class="success-msg">{{ success }}</p>
+  }
+
+  <div class="create-room-form">
+  <h3>Добавить комнату</h3>
+  
+  <input [(ngModel)]="newRoom.number" type="number" placeholder="Номер комнаты" />
+
+  <select [(ngModel)]="newRoom.type">
+    <option value="Стандарт">Стандарт</option>
+    <option value="Делюкс">Делюкс</option>
+    <option value="Люкс">Люкс</option>
+  </select>
+
+  <input [(ngModel)]="newRoom.pricePerNight" type="number" placeholder="Цена" />
+  <input [(ngModel)]="newRoom.mainImageUrl" placeholder="Изображение URL" />
+<div class="facilities-checklist">
+  <label *ngFor="let facilityName of availableFacilities">
+    <input 
+      type="checkbox" 
+[checked]="isFacilityChecked(facilityName)"
+      (change)="toggleFacility(facilityName, $event)" />
+    {{ facilityName }}
+  </label>
+</div>
+
+
+  <p>Вместимость</p>
+  <select [(ngModel)]="newRoom.capacity">
+    <option [value]="1">1</option>
+    <option [value]="2">2</option>
+    <option [value]="3">3</option>
+    <option [value]="4">4</option>
+  </select>
+
+  <textarea [(ngModel)]="newRoom.description" placeholder="Описание"></textarea>
+
+  <button (click)="create()">Добавить</button>
+</div>
+
+
+
+  @for ( room of rooms; track $index) {
+  <div class="room-card">
+    @if (editingRoom && editingRoom.id === room.id) {
+      <select [(ngModel)]="editingRoom.type">
+        <option value="Стандарт">Стандарт</option>
+        <option value="Делюкс">Делюкс</option>
+        <option value="Люкс">Люкс</option>
+      </select>
+
+      <input [(ngModel)]="editingRoom.pricePerNight" type="number" />
+      <input [(ngModel)]="editingRoom.mainImageUrl" />
+      <input [(ngModel)]="editingRoom.facilities" placeholder="Удобства" />
+      <textarea [(ngModel)]="editingRoom.description"></textarea>
+
+      <button (click)="saveEdit()">Сохранить</button>
+      <button (click)="cancelEdit()">Отмена</button>
+    } @else {
+      <h3>{{ room.type }}</h3>
+      <p><strong>Цена:</strong> {{ room.pricePerNight | currency: 'RUB' }}</p>
+      <img [src]="room.mainImageUrl" width="200" />
+      <p>{{ room.description }}</p>
+      <p><strong>Статус:</strong> {{ room.status }}</p>
+      <button (click)="edit(room)">Редактировать</button>
+      <button (click)="remove(room.id)">Удалить</button>
+    }
+  </div>
+}
+
+</section>

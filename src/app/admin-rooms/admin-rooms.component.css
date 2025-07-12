@@ -1,0 +1,33 @@
+.container {
+  padding: 30px;
+}
+
+.room-card {
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin: 10px 0;
+  border-radius: 8px;
+}
+
+input, textarea {
+  display: block;
+  margin-bottom: 10px;
+  padding: 8px;
+  width: 100%;
+}
+
+button {
+  margin-right: 10px;
+}
+
+.error-msg {
+  color: red;
+}
+
+.success-msg {
+  color: green;
+}
+
+.create-room-form {
+  margin-bottom: 30px;
+}

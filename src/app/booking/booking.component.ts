@@ -95,6 +95,7 @@ onServiceToggle(service: Service) {
         CheckIn: this.checkIn,
         CheckOut: this.checkOut,
         CreatedAt: new Date().toISOString(),
+        Status:"Created"
       };
 
       await this.bookingService.createBooking(booking);

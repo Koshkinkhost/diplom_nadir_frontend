@@ -1,0 +1,33 @@
+<section class="admin-bookings container">
+  <h2>Управление бронированиями</h2>
+
+  @if (error !== '') {
+    <p class="error-msg">{{ error }}</p>
+  }
+
+  @if (success !== '') {
+    <p class="success-msg">{{ success }}</p>
+  }
+
+  @if (bookings.length === 0) {
+    <p>Нет бронирований</p>
+  } @else {
+    <div class="booking-list">
+      @for (b of bookings; track b.id) {
+        <div class="booking-card">
+          <p><strong>Гость:</strong> {{ b.guestName }}</p>
+          <p><strong>Номер:</strong> {{ b.room }}</p>
+          <p><strong>С:</strong> {{ b.checkIn }} <strong>по</strong> {{ b.checkOut }}</p>
+          <p><strong>Статус:</strong> {{ b.status }}</p>
+
+          <div class="actions">
+            @if (b.status !== 'Confirmed') {
+              <button class="btn-confirm" (click)="confirmBooking(b.id)">Подтвердить</button>
+            }
+            <button class="btn-delete" (click)="deleteBooking(b.id)">Удалить</button>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</section>

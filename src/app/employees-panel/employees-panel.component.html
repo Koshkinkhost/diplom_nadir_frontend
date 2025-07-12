@@ -1,0 +1,25 @@
+<section class="admin-dashboard container">
+  <h1>Админ-панель</h1>
+
+  <nav class="admin-nav">
+    <button [class.active]="activeSection === 'bookings'" (click)="activeSection = 'bookings'">Бронирования</button>
+    <button [class.active]="activeSection === 'rooms'" (click)="activeSection = 'rooms'">Номера</button>
+    <button [class.active]="activeSection === 'users'" (click)="activeSection = 'users'">Пользователи</button>
+    <button [class.active]="activeSection === 'reviews'" (click)="activeSection = 'reviews'">Отзывы</button>
+  </nav>
+
+  <div class="admin-content">
+    @if (activeSection === 'bookings') {
+       <app-admin-bookings /> 
+    }
+    @if (activeSection === 'rooms') {
+      <app-admin-rooms /> 
+    }
+    @if (activeSection === 'users') {
+      <!-- <app-admin-users /> -->
+    }
+    @if (activeSection === 'reviews') {
+    <!-- <app-admin-reviews /> -->
+    }
+  </div>
+</section>

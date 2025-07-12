@@ -38,8 +38,8 @@
   <div class="room-cards">
       @for( room of popularRooms; track $index) {
         <div class="room-card">
-          <img src="{{room.mainImageUrl}}" alt="{{room.typeR}}" class="room-image" />
-          <h3>{{room.typeR}}</h3>
+          <img src="{{room.mainImageUrl}}" alt="{{room.type}}" class="room-image" />
+          <h3>{{room.type}}</h3>
           <p>{{room.description}}</p>
           <p class="price">{{room.pricePerNight}}</p>
         </div>

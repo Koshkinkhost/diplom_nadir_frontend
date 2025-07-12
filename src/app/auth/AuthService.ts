@@ -5,7 +5,7 @@ import { User } from './User';
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:5144';
+  private baseUrl = 'http://localhost:5144/api/staff';
 private userSubject = new BehaviorSubject<User | null>(null);
   public user$: Observable<User | null> = this.userSubject.asObservable();
   
@@ -87,5 +87,18 @@ private userSubject = new BehaviorSubject<User | null>(null);
   return res.json();
 }
 
-  
+  async loginStaff(email: string, password: string): Promise<string> {
+  const res = await fetch(`${this.baseUrl}/login`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify({ email, password })
+  });
+
+  if (!res.ok) throw new Error(await res.text());
+  const data=await res.json()
+  console.log(data);
+  return data.role; // например, "admin"
+}
+
 }

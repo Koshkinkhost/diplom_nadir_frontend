@@ -6,6 +6,8 @@ import { AuthComponent } from './auth/auth.component';
 import { authGuard } from '../../auth.guard';
 import { ProfileComponent } from './profile/profile.component';
 import { RoomsLookComponent } from './rooms-look/rooms-look.component';
+import { StaffOnlyComponent } from './staff-only/staff-only.component';
+import { EmployeesPanelComponent } from './employees-panel/employees-panel.component';
 export const routes: Routes = [
     {
         path:'',
@@ -23,6 +25,14 @@ export const routes: Routes = [
       {
          path:"rooms",
         component:RoomsLookComponent
+      },
+      {
+        path:'staff',
+        component:StaffOnlyComponent
+      },
+      {
+        path:'employees',
+        component:EmployeesPanelComponent
       }
 
 ];

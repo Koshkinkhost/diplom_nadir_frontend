@@ -1,11 +1,9 @@
-import { Room } from './Room';
 import { Injectable } from '@angular/core';
-
+import { Room } from './Room';
 @Injectable({
-  providedIn: 'root' // автоматическая регистрация
+  providedIn: 'root'
 })
 export class RoomsService {
-  // В конце обязательно слеш, чтобы удобно было писать относительные пути
   private baseUrl = 'http://localhost:5144/api/rooms/';
 
   async getRooms(): Promise<Room[]> {
@@ -20,7 +18,7 @@ export class RoomsService {
     return res.json();
   }
 
-  async createRoom(room: Partial<Room>): Promise<Room> {
+  async createRoom(room: Room): Promise<Room> {
     const res = await fetch(this.baseUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -31,7 +29,7 @@ export class RoomsService {
     return res.json();
   }
 
-  async updateRoom(id: number, room: Partial<Room>): Promise<void> {
+  async updateRoom(id: number, room: Room): Promise<void> {
     const res = await fetch(`${this.baseUrl}${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -41,12 +39,6 @@ export class RoomsService {
     if (!res.ok) throw new Error('Ошибка при обновлении комнаты');
   }
 
-  async getPopularRooms(count = 3): Promise<Room[]> {
-    const res = await fetch(`${this.baseUrl}popular?count=${count}`, { credentials: 'include' });
-    if (!res.ok) throw new Error('Ошибка при загрузке популярных комнат');
-    return res.json();
-  }
-
   async deleteRoom(id: number): Promise<void> {
     const res = await fetch(`${this.baseUrl}${id}`, {
       method: 'DELETE',
@@ -54,5 +46,10 @@ export class RoomsService {
     });
     if (!res.ok) throw new Error('Ошибка при удалении комнаты');
   }
-}
 
+  async getPopularRooms(count: number = 3): Promise<Room[]> {
+    const res = await fetch(`${this.baseUrl}popular?count=${count}`, { credentials: 'include' });
+    if (!res.ok) throw new Error('Ошибка при загрузке популярных комнат');
+    return res.json();
+  }
+}
