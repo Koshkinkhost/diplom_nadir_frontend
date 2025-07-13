@@ -5,13 +5,28 @@ import { User } from './User';
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:5144/api/staff';
+  private baseUrl = 'http://localhost:5144/api/auth';
 private userSubject = new BehaviorSubject<User | null>(null);
   public user$: Observable<User | null> = this.userSubject.asObservable();
   
   // Регистрация
   async register(name: string, email: string, password: string): Promise<string> {
     const res = await fetch(`${this.baseUrl}/register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ name, email, password })
+    });
+
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(text || 'Ошибка регистрации');
+    }
+
+    return res.text();
+  }
+   async register_admin(name: string, email: string, password: string): Promise<string> {
+    const res = await fetch(`http://localhost:5144/api/staff/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
@@ -53,6 +68,7 @@ private userSubject = new BehaviorSubject<User | null>(null);
 
     return res.text();
   }
+  
 
   // Выход
   async logout(): Promise<string> {
@@ -88,7 +104,7 @@ private userSubject = new BehaviorSubject<User | null>(null);
 }
 
   async loginStaff(email: string, password: string): Promise<string> {
-  const res = await fetch(`${this.baseUrl}/login`, {
+  const res = await fetch(`http://localhost:5144/api/staff/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',

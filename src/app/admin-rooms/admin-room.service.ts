@@ -32,7 +32,7 @@ export class AdminRoomService {
   const roomToSend = {
     ...room,
     number: room.number.toString(),  // если сервер требует строку
-    facilities: room.facilities     // просто отправляем объект, сериализуется автоматически
+    falitires: room.falitires     // просто отправляем объект, сериализуется автоматически
   };
 
   console.log('Отправляю:', roomToSend);

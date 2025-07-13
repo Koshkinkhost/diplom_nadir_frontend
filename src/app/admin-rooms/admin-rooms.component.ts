@@ -20,7 +20,7 @@ rooms: Room[] = [];
   error = '';
   success = '';
   editingRoom: Room | null = null;
-availableFacilities: string[] = ['Wi-Fi', 'Джакузи', 'Мини-бар'];
+availablefalitires: string[] = ['Wi-Fi', 'Джакузи', 'Мини-бар'];
 
 newRoom: Room = {
   id: 0,
@@ -31,7 +31,7 @@ newRoom: Room = {
   mainImageUrl: '',
   status: 'Available',
   capacity: 1,
-  facilities: []
+  falitires: []
 };
 
 
@@ -45,16 +45,16 @@ newRoom: Room = {
 
   if (checked) {
     // Добавляем в массив, если ещё нет
-    if (!this.newRoom.facilities!.some(f => f.name === facilityName)) {
-      this.newRoom.facilities!.push({ name: facilityName });
+    if (!this.newRoom.falitires!.some(f => f.name === facilityName)) {
+      this.newRoom.falitires!.push({ name: facilityName });
     }
   } else {
     // Убираем из массива
-    this.newRoom.facilities = this.newRoom.facilities!.filter(f => f.name !== facilityName);
+    this.newRoom.falitires = this.newRoom.falitires!.filter(f => f.name !== facilityName);
   }
 }
 isFacilityChecked(facilityName: string): boolean {
-  return this.newRoom.facilities!.some(f => f.name === facilityName);
+  return this.newRoom.falitires!.some(f => f.name === facilityName);
 }
 
 

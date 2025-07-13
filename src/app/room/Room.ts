@@ -10,6 +10,6 @@ id: number;                        // RoomDTO.Id
   mainImageUrl: string;            // RoomDTO.MainImageUrl
   galleryJson?: string;            // RoomDTO.GalleryJson
   status?: string; 
-  facilities?: Facility[] // ✅ пустой массив
+  falitires?: Facility[] // ✅ пустой массив
 
 }

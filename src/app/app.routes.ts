@@ -8,6 +8,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { RoomsLookComponent } from './rooms-look/rooms-look.component';
 import { StaffOnlyComponent } from './staff-only/staff-only.component';
 import { EmployeesPanelComponent } from './employees-panel/employees-panel.component';
+import { FeedbackComponent } from './feedback/feedback.component';
 export const routes: Routes = [
     {
         path:'',
@@ -33,6 +34,10 @@ export const routes: Routes = [
       {
         path:'employees',
         component:EmployeesPanelComponent
+      },
+      {
+        path:'feedback',
+        component:FeedbackComponent
       }
 
 ];

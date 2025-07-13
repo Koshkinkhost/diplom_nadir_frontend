@@ -1,0 +1,32 @@
+<div class="feedback-container">
+  <h2>Оставьте отзыв о проживании</h2>
+
+  <label>Выберите бронирование:</label>
+  <select [(ngModel)]="selectedBookingId">
+    @for (booking of bookings; track booking.id) {
+      <option [value]="booking.id">{{ booking.RoomId }} Заезд: {{  booking.CheckIn| currency: 'date' }} Выезд{{booking.CheckOut| currency: 'date'}}</option>
+    }
+  </select>
+
+  <label>Оцените номер:</label>
+  <div class="stars">
+    @for (star of [1, 2, 3, 4, 5]; track $index) {
+      <span
+        (click)="rating = star"
+        [class.active]="star <= rating"
+        class="star"
+        title="{{ star }} звёзд">
+        ★
+      </span>
+    }
+  </div>
+
+  <label>Комментарий:</label>
+  <textarea [(ngModel)]="comment" rows="4" placeholder="Что вам понравилось? Что можно улучшить?"></textarea>
+
+  <button (click)="submitFeedback()">Отправить</button>
+
+  @if (success) {
+    <p class="success-message">Спасибо за ваш отзыв!</p>
+  }
+</div>

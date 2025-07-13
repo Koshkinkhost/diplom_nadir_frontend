@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { AuthService } from '../auth/AuthService';
 import { Router } from '@angular/router';
 import { MyBookingsComponent } from '../my-bookings/my-bookings.component';
+import { FeedbackComponent } from '../feedback/feedback.component';
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [MyBookingsComponent],
+  imports: [MyBookingsComponent,FeedbackComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
@@ -15,7 +16,7 @@ export class ProfileComponent {
   error = '';
 
   constructor(private authService: AuthService, private router: Router) {}
-  activeTab: 'profile' | 'bookings' | 'settings' = 'profile';
+  activeTab: 'profile' | 'bookings' | 'settings'|'feedback' = 'profile';
 
   async ngOnInit() {
     try {

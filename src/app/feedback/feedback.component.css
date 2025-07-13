@@ -1,0 +1,73 @@
+.feedback-container {
+  max-width: 600px;
+  margin: 40px auto;
+  background: #fff8f0;
+  border: 1px solid #e0cdbd;
+  padding: 30px;
+  border-radius: 16px;
+  font-family: 'Georgia', serif;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+.feedback-container h2 {
+  margin-bottom: 20px;
+  color: #5a4333;
+  font-size: 24px;
+}
+
+.feedback-container label {
+  display: block;
+  margin-top: 16px;
+  margin-bottom: 6px;
+  color: #7b5e4b;
+  font-weight: 500;
+}
+
+.feedback-container select,
+.feedback-container textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d7c2b0;
+  border-radius: 8px;
+  font-size: 14px;
+  resize: none;
+}
+
+.stars {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.star {
+  font-size: 28px;
+  cursor: pointer;
+  color: #ccc;
+  transition: color 0.2s ease;
+}
+
+.star.active {
+  color: #d6aa6b;
+}
+
+button {
+  margin-top: 20px;
+  background: #d6aa6b;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #c89a58;
+}
+
+.success-message {
+  margin-top: 16px;
+  color: green;
+  font-weight: bold;
+}

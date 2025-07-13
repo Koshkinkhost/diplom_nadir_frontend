@@ -23,7 +23,7 @@
   <input [(ngModel)]="newRoom.pricePerNight" type="number" placeholder="Цена" />
   <input [(ngModel)]="newRoom.mainImageUrl" placeholder="Изображение URL" />
 <div class="facilities-checklist">
-  <label *ngFor="let facilityName of availableFacilities">
+  <label *ngFor="let facilityName of availablefalitires">
     <input 
       type="checkbox" 
 [checked]="isFacilityChecked(facilityName)"
@@ -59,7 +59,7 @@
 
       <input [(ngModel)]="editingRoom.pricePerNight" type="number" />
       <input [(ngModel)]="editingRoom.mainImageUrl" />
-      <input [(ngModel)]="editingRoom.facilities" placeholder="Удобства" />
+      <input [(ngModel)]="editingRoom.falitires" placeholder="Удобства" />
       <textarea [(ngModel)]="editingRoom.description"></textarea>
 
       <button (click)="saveEdit()">Сохранить</button>
