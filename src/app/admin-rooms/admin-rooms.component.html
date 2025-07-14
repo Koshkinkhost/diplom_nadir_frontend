@@ -51,21 +51,42 @@
   @for ( room of rooms; track $index) {
   <div class="room-card">
     @if (editingRoom && editingRoom.id === room.id) {
-      <select [(ngModel)]="editingRoom.type">
-        <option value="Стандарт">Стандарт</option>
-        <option value="Делюкс">Делюкс</option>
-        <option value="Люкс">Люкс</option>
-      </select>
+  <select [(ngModel)]="editingRoom.type">
+    <option value="Стандарт">Стандарт</option>
+    <option value="Делюкс">Делюкс</option>
+    <option value="Люкс">Люкс</option>
+  </select>
 
-      <input [(ngModel)]="editingRoom.pricePerNight" type="number" />
-      <input [(ngModel)]="editingRoom.mainImageUrl" />
-      <input [(ngModel)]="editingRoom.number"  >
-      <input [(ngModel)]="editingRoom.falitires" placeholder="Удобства" />
-      <textarea [(ngModel)]="editingRoom.description"></textarea>
+  <input [(ngModel)]="editingRoom.pricePerNight" type="number" />
+  <input [(ngModel)]="editingRoom.mainImageUrl" />
+  <input [(ngModel)]="editingRoom.number" />
 
-      <button (click)="saveEdit()">Сохранить</button>
-      <button (click)="cancelEdit()">Отмена</button>
-    } @else {
+  <textarea [(ngModel)]="editingRoom.description"></textarea>
+
+  <!-- ✅ Новый селект для статуса -->
+  <p>Статус</p>
+  <select [(ngModel)]="editingRoom.status">
+    <option value="Available">Available</option>
+    <option value="Booked">Booked</option>
+  </select>
+  <div class="facilities-checklist">
+  @for (facilityName of availablefalitires; track facilityName) {
+    <label>
+      <input
+        type="checkbox"
+        [checked]="isEditingFacilityChecked(facilityName)"
+        (change)="toggleEditingFacility(facilityName, $event)"
+      />
+      {{ facilityName }}
+    </label>
+  }
+</div>
+
+
+  <button (click)="saveEdit()">Сохранить</button>
+  <button (click)="cancelEdit()">Отмена</button>
+}
+ @else {
       <h3>{{ room.type }}</h3>
       <p><strong>Цена:</strong> {{ room.pricePerNight | currency: 'RUB' }}</p>
       <img [src]="room.mainImageUrl" width="200" />

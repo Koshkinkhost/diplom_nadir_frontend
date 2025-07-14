@@ -56,6 +56,7 @@ export class AdminBookingsComponent {
       room: booking.room,
       checkIn: booking.checkIn,
       checkOut: booking.checkOut,
+      RoomNumber:booking.roomNumber,
       status: 'Confirmed'
     };
       const res = await fetch(`http://localhost:5144/api/admin/bookings/${id}`, {

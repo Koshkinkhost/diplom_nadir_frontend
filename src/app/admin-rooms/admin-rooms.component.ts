@@ -57,6 +57,22 @@ isFacilityChecked(facilityName: string): boolean {
   return this.newRoom.falitires!.some(f => f.name === facilityName);
 }
 
+isEditingFacilityChecked(facilityName: string): boolean {
+  return this.editingRoom?.falitires?.some(f => f.name === facilityName) ?? false;
+}
+
+toggleEditingFacility(facilityName: string, event: Event) {
+  if (!this.editingRoom) return;
+  const checked = (event.target as HTMLInputElement).checked;
+
+  if (checked) {
+    if (!this.editingRoom!.falitires!.some(f => f.name === facilityName)) {
+      this.editingRoom!.falitires!.push({ name: facilityName });
+    }
+  } else {
+    this.editingRoom.falitires = this.editingRoom!.falitires!.filter(f => f.name !== facilityName);
+  }
+}
 
   async loadRooms() {
     try {
