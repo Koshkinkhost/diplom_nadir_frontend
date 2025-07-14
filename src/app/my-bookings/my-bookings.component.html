@@ -16,8 +16,10 @@
             <span class="status">{{ booking.status }}</span>
           </div>
 
-          <p><strong>Номер комнаты:</strong> {{ booking.room?.type || '—' }}</p>
-          <p><strong>Цена за ночь:</strong> {{ booking.room?.pricePerNight || '—' }} ₽</p>
+          <p><strong>Номер комнаты:</strong> {{ booking.roomNumber || '—' }}</p>
+          <p><strong>Цена за ночь:</strong> {{ booking.pricePerNight |currency: 'RUB ':'symbol':'1.0-0' }} ₽</p>
+          <p><strong>Тип номера</strong> {{ booking.room }} </p>
+
 
           <p><strong>Дата заезда:</strong> {{ booking.checkIn }}</p>
           <p><strong>Дата выезда:</strong> {{ booking.checkOut }}</p>

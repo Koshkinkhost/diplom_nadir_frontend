@@ -32,16 +32,23 @@ async getAvailableServices(): Promise<Service[]> {
 }
   // Создать новое бронирование
   async createBooking(booking: Booking): Promise<Booking> {
-    console.log(booking);
-    const res = await fetch("http://localhost:5144/api/booking/", {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify(booking)
-    });
-    if (!res.ok) throw new Error('Ошибка при создании бронирования');
-    return res.json();
+  const res = await fetch("http://localhost:5144/api/booking/", {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify(booking)
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    // Предполагается, что сервер возвращает ошибку в формате: { message: "..." }
+    throw new Error(data.message || 'Ошибка при создании бронирования');
   }
+
+  return data;
+}
+
 
   // Обновить бронирование
   async updateBooking(id: number, booking: Partial<Booking>): Promise<void> {

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { BookingService } from '../booking/BookingService';
 import { Booking } from '../booking/Booking';
 import { FeedbackService } from './Feedbackservice';
+import { AuthService } from '../auth/AuthService';
 @Component({
   selector: 'app-feedback',
   standalone: true,
@@ -12,18 +13,21 @@ import { FeedbackService } from './Feedbackservice';
   styleUrls: ['./feedback.component.css']
 })
 export class FeedbackComponent {
-  bookings: Booking[] = [];
+  bookings: any[] = [];
   selectedBookingId: string = '';
   rating: number = 0;
   comment: string = '';
   success: boolean = false;
 
-  constructor(private bookingService: BookingService,private feedbackService: FeedbackService
+  constructor(private bookingService: BookingService,private feedbackService: FeedbackService,private authService:AuthService
   ) {}
 
   async ngOnInit() {
     try {
-      this.bookings = await this.bookingService.getAllBookings();
+      const guest=await this.authService.getCurrentUser();
+      console.log(guest);
+      this.bookings = await this.bookingService.getBooking(guest.id);
+      console.log("юронирования",this.bookings);
     } catch (error) {
       console.error('Ошибка при получении бронирований:', error);
     }

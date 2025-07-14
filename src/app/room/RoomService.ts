@@ -7,13 +7,13 @@ export class RoomsService {
   private baseUrl = 'http://localhost:5144/api/rooms/';
 
   async getRooms(): Promise<Room[]> {
-    const res = await fetch(this.baseUrl, { credentials: 'include' });
+    const res = await fetch(this.baseUrl);
     if (!res.ok) throw new Error('Ошибка при загрузке комнат');
     return res.json();
   }
 
   async getRoom(id: number): Promise<Room> {
-    const res = await fetch(`${this.baseUrl}${id}`, { credentials: 'include' });
+    const res = await fetch(`${this.baseUrl}${id}`);
     if (!res.ok) throw new Error('Ошибка при загрузке комнаты');
     return res.json();
   }

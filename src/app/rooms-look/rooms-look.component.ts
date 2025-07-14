@@ -19,7 +19,8 @@ user:any;
 
   async ngOnInit() {
     try {
-      this.user=await this.authservice.loadCurrentUser();
+      this.user=await this.authservice.getCurrentUser();
+      console.log("pw,rpv,eprv",this.user);
       this.rooms = await this.roomService.getRooms();
       console.log(this.rooms);
     } catch (err) {

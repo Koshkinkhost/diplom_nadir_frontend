@@ -11,5 +11,6 @@ id: number;                        // RoomDTO.Id
   galleryJson?: string;            // RoomDTO.GalleryJson
   status?: string; 
   falitires?: Facility[] // ✅ пустой массив
+  Amount?:number
 
 }

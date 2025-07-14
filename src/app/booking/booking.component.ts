@@ -1,59 +1,54 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-
-import { RoomsService } from '../room/RoomService';
-import { FormsModule } from '@angular/forms'; 
-  import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
-import { Room } from '../room/Room';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RoomsService } from '../room/RoomService';
 import { BookingService } from './BookingService';
 import { AuthService } from '../auth/AuthService';
 import { Service } from './Service';
-import {  OnInit } from '@angular/core'; // <-- добавь OnInit
+import { Room } from '../room/Room';
 
 @Component({
   selector: 'app-booking',
   standalone: true,
-  imports: [FormsModule,CommonModule,RouterLink,RouterLinkActive],
-templateUrl: './booking.component.html',
+  imports: [FormsModule, CommonModule],
+  templateUrl: './booking.component.html',
   styleUrl: './booking.component.css'
 })
 export class BookingComponent {
-  services:Service[]=[]
-rooms: Room[] = [];
+  services: Service[] = [];
+  rooms: Room[] = [];
   roomId: number = 0;
   checkIn: string = '';
   checkOut: string = '';
   guestName: string = '';
   guestEmail: string = '';
-pricePerNight:number=0;
+  userId: number = 0;
+
+  selectedServiceIds: number[] = [];
+  totalAmount: number = 0;
+
   successMessage = '';
   errorMessage = '';
-  userId:Number=0;
-selectedServiceIds: number[] = [];
 
-constructor(
-  private roomService: RoomsService,
-  private bookingService: BookingService,
-  private router:Router,
-  private auth:AuthService,
-    private route: ActivatedRoute,
+  constructor(
+    private roomService: RoomsService,
+    private bookingService: BookingService,
+    private router: Router,
+    private auth: AuthService,
+    private route: ActivatedRoute
+  ) {}
 
-) {}
-   ngOnInit(): void {
-    this.init(); // <-- вызываем реальный async метод отдельно
+  ngOnInit(): void {
+    this.init();
   }
 
   private async init() {
     this.route.queryParams.subscribe((params: any) => {
-      const id = +params['roomId'];
-      const name=params['username']
-      if (id) {
-        this.roomId = id; // тут устанавливается выбранный номер
-        console.log("имя юзера"+ name);
-        this.guestName=name;
-      }
+      const id = params['roomId'];
+      const name = params['username'];
+      this.roomId = +id;
+      this.guestName = name ?? '';
     });
 
     this.rooms = await this.roomService.getRooms();
@@ -65,14 +60,29 @@ constructor(
     } catch {
       this.router.navigate(['/auth']);
     }
+
+    this.updateTotalAmount();
   }
-onServiceToggle(service: Service) {
-  if (service.IsChecked) {
-    this.selectedServiceIds.push(service.id);
-  } else {
-    this.selectedServiceIds = this.selectedServiceIds.filter((id:any) => id !== service.id);
+
+  onServiceToggle(service: Service) {
+    if (service.IsChecked) {
+      this.selectedServiceIds.push(service.id);
+    } else {
+      this.selectedServiceIds = this.selectedServiceIds.filter(id => id !== service.id);
+    }
+    this.updateTotalAmount();
   }
-}
+
+  private updateTotalAmount() {
+    const room = this.rooms.find(r => r.id === this.roomId);
+    const roomPrice = room?.pricePerNight ?? 0;
+
+    const selectedServices = this.services.filter(s => this.selectedServiceIds.includes(s.id));
+    const servicesTotal = selectedServices.reduce((sum, s) => sum + s.price, 0);
+
+    this.totalAmount = roomPrice + servicesTotal;
+  }
+
   async bookRoom() {
     this.errorMessage = '';
     this.successMessage = '';
@@ -95,7 +105,9 @@ onServiceToggle(service: Service) {
         CheckIn: this.checkIn,
         CheckOut: this.checkOut,
         CreatedAt: new Date().toISOString(),
-        Status:"Created"
+        Status: "Created",
+        Amount: this.totalAmount,
+        Services: this.selectedServiceIds
       };
 
       await this.bookingService.createBooking(booking);

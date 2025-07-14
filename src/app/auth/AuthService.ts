@@ -86,22 +86,33 @@ private userSubject = new BehaviorSubject<User | null>(null);
     return res.text();
   }
 
-  // Получить текущего пользователя
   async getCurrentUser(): Promise<{ id: number; name: string; email: string }> {
-  const res = await fetch(`${this.baseUrl}/me`, {
-    credentials: 'include'
-  });
+  try {
+    const res = await fetch(`${this.baseUrl}/me`, {
+      credentials: 'include'
+    });
 
-  if (res.status === 401) {
-    throw new Error('Не авторизован');
+    if (res.status === 401) {
+      console.log('Не авторизован');
+      // Возвращаем "пустого" пользователя с нулями/пустыми строками
+      return { id: 0, name: '', email: '' };
+    }
+
+    if (!res.ok) {
+      console.log('Ошибка получения пользователя');
+      return { id: 0, name: '', email: '' };
+    }
+
+    const user = await res.json();
+    return user;
+  } catch (error) {
+    console.log('Ошибка запроса:', error);
+    // Возвращаем пустого пользователя, чтобы не ломалось
+    return { id: 0, name: '', email: '' };
   }
-
-  if (!res.ok) {
-    throw new Error('Ошибка получения пользователя');
-  }
-
-  return res.json();
 }
+
+
 
   async loginStaff(email: string, password: string): Promise<string> {
   const res = await fetch(`http://localhost:5144/api/staff/login`, {

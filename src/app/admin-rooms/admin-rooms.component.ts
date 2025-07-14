@@ -77,6 +77,7 @@ isFacilityChecked(facilityName: string): boolean {
   async saveEdit() {
     if (!this.editingRoom) return;
     try {
+      console.log(this.editingRoom);
       await this.roomService.updateRoom(this.editingRoom.id,this.editingRoom);
       this.success = 'Комната обновлена';
       await this.loadRooms();

@@ -59,6 +59,7 @@
 
       <input [(ngModel)]="editingRoom.pricePerNight" type="number" />
       <input [(ngModel)]="editingRoom.mainImageUrl" />
+      <input [(ngModel)]="editingRoom.number"  >
       <input [(ngModel)]="editingRoom.falitires" placeholder="Удобства" />
       <textarea [(ngModel)]="editingRoom.description"></textarea>
 
@@ -69,6 +70,8 @@
       <p><strong>Цена:</strong> {{ room.pricePerNight | currency: 'RUB' }}</p>
       <img [src]="room.mainImageUrl" width="200" />
       <p>{{ room.description }}</p>
+      <p>{{ room.number }}</p>
+
       <p><strong>Статус:</strong> {{ room.status }}</p>
       <button (click)="edit(room)">Редактировать</button>
       <button (click)="remove(room.id)">Удалить</button>

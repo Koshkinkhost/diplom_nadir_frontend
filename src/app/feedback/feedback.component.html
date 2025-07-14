@@ -3,10 +3,13 @@
 
   <label>Выберите бронирование:</label>
   <select [(ngModel)]="selectedBookingId">
-    @for (booking of bookings; track booking.id) {
-      <option [value]="booking.id">{{ booking.RoomId }} Заезд: {{  booking.CheckIn| currency: 'date' }} Выезд{{booking.CheckOut| currency: 'date'}}</option>
-    }
-  </select>
+  @for (booking of bookings; track booking.id) {
+    <option [value]="booking.id">
+      🛏 Комната #{{ booking.room }} | 📅{{ booking.checkIn | date: 'dd.MM.yyyy' }} → {{ booking.checkOut | date: 'dd.MM.yyyy' }}  Гость:{{booking.guestName}}
+    </option>
+  }
+</select>
+
 
   <label>Оцените номер:</label>
   <div class="stars">

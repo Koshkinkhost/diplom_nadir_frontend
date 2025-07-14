@@ -8,7 +8,7 @@ export const authGuard: CanActivateFn = async (route, state) => {
 
   try {
     const user = await authService.loadCurrentUser(); // ← сначала сохраняем!
-    if (user) return true;
+    if (user!.id!=0) return true;
     return false;
   } catch {
     return false;
